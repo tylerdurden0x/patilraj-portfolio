@@ -228,8 +228,8 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       role="button"
       aria-expanded={isOpen}
     >
-      <div className="flex items-center gap-4">
-        <div className="text-3xl select-none" aria-hidden>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <div className="text-3xl select-none shrink-0" aria-hidden>
           {e.logo}
         </div>
 
@@ -242,7 +242,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+        <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap shrink-0">
           <span>{e.start} - {e.end}</span>
           <ChevronDown
             className={cx(
