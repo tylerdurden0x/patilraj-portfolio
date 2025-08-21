@@ -195,23 +195,26 @@ function Hero() {
 }
 
 
+/* ---------------- About Section ---------------- */
 function About() {
   return (
-    <Section id="about" title="About" className="pt-12 sm:pt-16">
-      <div className="max-w-3xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12">
+    <Section id="about" title="About">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-          I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
-          scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
-          <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
-          <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
-          deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>.
-          My mission is to architect <span className="font-semibold">scalable, production-grade software</span>
+          I'm a <span className="font-semibold">Founding Engineer</span> driven by building products 
+          that scale to <span className="font-semibold">lakhs of users</span>. 
+          I've shipped over <span className="font-semibold">10 commercial projects</span> and have 
+          consistently placed as a <span className="font-semibold">winner or finalist in 8 national hackathons</span>, 
+          a testament to my ability to deliver creative, 
+          <span className="font-semibold"> high-impact solutions under extreme pressure</span>. 
+          My mission is to architect <span className="font-semibold">scalable, production-grade software</span> 
           from ambitious ideas.
         </p>
       </div>
     </Section>
   );
 }
+
 
 
 function ExperienceItem({ e, isOpen, onToggle }) {
