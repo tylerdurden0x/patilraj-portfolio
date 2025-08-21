@@ -161,10 +161,10 @@ function Hero() {
     <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start gap-6 sm:gap-10">
         <div className="flex-1 min-w-0">
-          <h1 className="text-2xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
-            Hi, I'm Raj 
+          <h1 className="text-1.5xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
+            Hi, I'm Raj Patil
           </h1>
-          <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-[36ch] sm:max-w-[52ch]">
+          <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-xl sm:text-xl max-w-[36ch] sm:max-w-[52ch]">
             Software Engineer scaling products to lakhs of users. 8x National
             Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
           </p>
