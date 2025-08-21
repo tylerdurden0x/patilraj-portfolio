@@ -228,16 +228,16 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       role="button"
       aria-expanded={isOpen}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         <div className="text-3xl select-none shrink-0" aria-hidden>
           {e.logo}
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="font-semibold text-neutral-900 dark:text-white truncate">
+          <div className="font-semibold text-neutral-900 dark:text-white">
             {e.company}
           </div>
-          <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
+          <div className="text-sm text-neutral-500 dark:text-neutral-400">
             {e.role}
           </div>
         </div>
