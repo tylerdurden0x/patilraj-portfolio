@@ -548,28 +548,53 @@ function ContactSection() {
       </h2>
 
       {/* Paragraph */}
-      <p className="text-neutral-700 dark:text-neutral-400 mt-6 max-w-full sm:max-w-3xl mx-auto 
-              text-base sm:text-lg leading-relaxed px-4 sm:px-0">
-        Want to chat? Feel free to{" "}
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
-          className="inline-block min-h-[44px] px-1 text-blue-600 dark:text-blue-400 font-medium hover:underline">
-        DM me on LinkedIn
-        </a>{" "}
-        or{" "}
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-            className="inline-block min-h-[44px] px-1 text-red-600 dark:text-blue-400 font-medium hover:underline">
-          Twitter
-        </a>{" "}
-        with a direct question, or{" "}
-        <a href="https://calendly.com" target="_blank" rel="noopener noreferrer"
-       className="inline-block min-h-[44px] px-1 text-green-600 dark:text-blue-400 font-medium hover:underline">
-          book a meeting
-        </a>{" "}
-        if you prefer a scheduled call. I'll respond whenever I can, but I do ignore all soliciting.
+      <p className="text-neutral-700 dark:text-neutral-400 mt-6 max-w-2xl mx-auto 
+              text-lg sm:text-xl leading-relaxed space-y-3">
+        <span>
+          Want to chat? Feel free to{" "}
+          <a
+            href="https://www.linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+          >
+            DM me on LinkedIn
+          </a>
+          .
+        </span>
+        <br />
+        <span>
+          You can also message me on{" "}
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-600 dark:text-red-400 font-medium hover:underline"
+          >
+            Twitter
+          </a>
+          .
+        </span>
+        <br />
+        <span>
+          Or{" "}
+          <a
+            href="https://calendly.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-600 dark:text-green-400 font-medium hover:underline"
+          >
+            book a meeting
+          </a>{" "}
+          if you prefer a scheduled call.
+        </span>
       </p>
     </section>
   );
 }
+
+
+
 
 function ClosingSection() {
   return (
