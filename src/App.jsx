@@ -661,50 +661,162 @@ function BlogCard({ post }) {
   );
 }
 
+
+
 function BlogView() {
-  const [q, setQ] = useState("");
-  const filtered = useMemo(() => {
-    const s = q.toLowerCase();
-    return BLOG_POSTS.filter(
-      (p) =>
-        p.title.toLowerCase().includes(s) ||
-        p.tags.join(" ").toLowerCase().includes(s)
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+
+  // Helper: pick an image (Substack enclosure -> Unsplash fallback)
+  const imageFor = (post) => {
+    if (post?.enclosure?.link) return post.enclosure.link;
+    const q = encodeURIComponent(
+      (post?.title || "creative design tech blog").toLowerCase()
     );
-  }, [q]);
+    return `https://source.unsplash.com/random/800x500/?${q}`;
+  };
+
+  useEffect(() => {
+    fetch(
+      "https://api.rss2json.com/v1/api.json?rss_url=https://thisisrajpatil.substack.com/feed"
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        setPosts(Array.isArray(data.items) ? data.items : []);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.error("Feed error:", e);
+        setLoading(false);
+      });
+  }, []);
+
+  const filtered = posts.filter((p) =>
+    (p.title || "").toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-12 sm:pt-16">
-      <div className="flex items-end justify-between gap-4 flex-wrap">
-        <div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
-            Blog
-          </h1>
-          <p className="text-neutral-700 dark:text-neutral-300 mt-2 max-w-2xl">
-            Notes on building scalable products, GenAI engineering, and
-            founder-oriented tech.
-          </p>
+    <section className="relative bg-transparent w-full">
+      {/* Top: pill + big heading + subtitle */}
+      <div className="max-w-5xl mx-auto px-4 pt-10 sm:pt-14 text-center">
+        <div
+          className="inline-flex items-center justify-center px-6 py-2 rounded-2xl
+                     bg-black/5 dark:bg-white/5 ring-1 ring-black/10 dark:ring-white/10
+                     backdrop-blur supports-[backdrop-filter]:backdrop-blur-md select-none"
+        >
+          <span className="text-base font-semibold text-neutral-800 dark:text-neutral-200">
+            My Posts
+          </span>
         </div>
-        <div className="w-full sm:w-auto">
+
+        <h1
+          className="mt-5 text-4xl sm:text-6xl font-extrabold tracking-tight
+                     text-neutral-900 dark:text-white"
+        >
+          Blogs and Research Papers
+        </h1>
+
+        <p className="mt-4 text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">
+          Thoughts, experiments, and notes I’ve published
+        </p>
+
+        {/* Glassy search bar */}
+        <div className="mt-7 flex justify-center">
           <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search posts"
-            className="w-full sm:w-72 px-4 py-2.5 rounded-xl bg-white/90 dark:bg-neutral-900/80 ring-1 ring-black/10 dark:ring-white/10 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus:ring-black/20 dark:focus:ring-white/30"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search posts..."
+            className="w-full sm:w-[560px] px-5 py-3 rounded-2xl
+                       bg-white/60 dark:bg-neutral-900/60
+                       ring-1 ring-black/10 dark:ring-white/10
+                       backdrop-blur supports-[backdrop-filter]:backdrop-blur-md
+                       text-neutral-900 dark:text-neutral-100
+                       placeholder:text-neutral-500
+                       focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/25"
           />
         </div>
       </div>
 
-      <div className="grid gap-3 sm:gap-4 mt-6 sm:mt-8">
-        {filtered.map((p) => (
-          <BlogCard key={p.slug} post={p} />
-        ))}
-        {filtered.length === 0 && (
-          <Card className="text-neutral-400">No posts match your search.</Card>
+      {/* Content */}
+      <div className="max-w-5xl mx-auto px-4 mt-10 pb-16">
+        {/* Loading / Empty */}
+        {loading && (
+          <div className="grid sm:grid-cols-2 gap-6">
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="h-64 rounded-2xl bg-black/5 dark:bg-white/5
+                           ring-1 ring-black/10 dark:ring-white/10 animate-pulse"
+              />
+            ))}
+          </div>
         )}
+
+        {!loading && filtered.length === 0 && (
+          <div className="text-center text-neutral-500 dark:text-neutral-400">
+            No posts found.
+          </div>
+        )}
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {filtered.map((post, idx) => (
+            <a
+              key={idx}
+              href={post.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group overflow-hidden rounded-2xl
+                         ring-1 ring-black/10 dark:ring-white/10
+                         bg-white/70 dark:bg-neutral-900/70
+                         backdrop-blur-md hover:shadow-xl transition-all duration-300"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img
+                  src={imageFor(post)}
+                  alt={post.title}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t
+                                from-black/40 via-black/10 to-transparent" />
+              </div>
+
+              <div className="p-5">
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+                  {post.title}
+                </h2>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                  {post.pubDate ? new Date(post.pubDate).toDateString() : ""}
+                </p>
+
+                <p className="mt-3 text-sm text-neutral-700 dark:text-neutral-300 line-clamp-3">
+                  {(post.description || "")
+                    .replace(/<[^>]+>/g, "")
+                    .trim()}
+                </p>
+
+                <div className="mt-4 inline-flex items-center gap-2 text-sm font-medium
+                                text-blue-600 dark:text-blue-400">
+                  <Globe className="h-4 w-4" />
+                  Read Post
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
+
+
+
+
+
+
+
 
 /* --------------------------- Shell / Layout ----------------------------- */
 function Dock({ view, dark, setDark }) {
