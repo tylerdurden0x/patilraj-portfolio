@@ -159,9 +159,9 @@ const PROJECTS = [
 function Hero() {
   return (
     <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
-      <div className="flex items-start gap-6 sm:gap-10">
+      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10">
         <div className="flex-1">
-          <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
+          <h1 className="text-2xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
             Hi, I'm Raj 
           </h1>
           <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-2xl">
@@ -171,12 +171,12 @@ function Hero() {
         </div>
 
         {/* Avatar / Decorative */}
-        <div className="hidden sm:block">
+        <div className="block sm:block">
           <motion.div
             initial={{ rotate: -8, y: -6, opacity: 0 }}
             animate={{ rotate: 0, y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            className="relative w-28 h-28 sm:w-32 sm:h-32"
+            className="relative w-20 h-20 sm:w-32 sm:h-32 mt-6 sm:mt-0"
           >
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-black/10 to-black/0 dark:from-white/15 dark:to-white/0 ring-1 ring-black/10 dark:ring-white/20" />
             <div className="absolute inset-[6px] rounded-2xl bg-white dark:bg-neutral-900 grid place-items-center text-5xl">
@@ -194,16 +194,16 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-      <p>
-        I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
-        scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
-        <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
-        <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
-        deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>.
-        My mission is to architect <span className="font-semibold">scalable, production-grade software</span>
-        from ambitious ideas.
-      </p>
-    </Section>
+  <p className="max-w-2xl text-base sm:text-lg leading-relaxed">
+    I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
+    scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
+    <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
+    <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
+    deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>.
+    My mission is to architect <span className="font-semibold">scalable, production-grade software</span>
+    from ambitious ideas.
+  </p>
+</Section>
   );
 }
 
@@ -766,7 +766,7 @@ function Dock({ view, dark, setDark }) {
       </motion.nav>
     </div>
   );
-  
+
 }
 
 
