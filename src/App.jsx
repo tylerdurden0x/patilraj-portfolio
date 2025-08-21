@@ -662,14 +662,14 @@ function Dock({ view, dark, setDark }) {
   ];
 
   return (
-    <div className="fixed left-1/2 -translate-x-1/2 z-40 bottom-[max(env(safe-area-inset-bottom),0.75rem)]">
+    <div className="fixed inset-x-0 bottom-2 z-40 flex justify-center px-2">
       <motion.nav
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
-        className="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md shadow-lg
-        border border-white/20 dark:border-white/10 rounded-2xl
-        px-1.5 py-1.5 sm:px-6 sm:py-4 flex items-center justify-center gap-1 sm:gap-4">
+        className="bg-white/90 dark:bg-neutral-900/80 backdrop-blur-md shadow-lg
+                 border border-white/20 dark:border-white/10 rounded-2xl
+                 w-auto max-w-md sm:max-w-fit flex items-center justify-between gap-2 px-4 py-2">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Left: Home | Blog */}
           <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
