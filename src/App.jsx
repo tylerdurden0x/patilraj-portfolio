@@ -201,18 +201,39 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-      <p className="max-w-[65ch] text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-        I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
-        scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
-        <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
-        <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
-        deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>. My mission
-        is to architect <span className="font-semibold">scalable, production-grade software</span>{" "}
+      <p className="max-w-[65ch] text-base sm:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
+        I'm a{" "}
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          Founding Engineer
+        </span>{" "}
+        driven by building products that scale to{" "}
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          lakhs of users
+        </span>
+        . I've shipped over
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          {" "}
+          10 commercial projects
+        </span>{" "}
+        and have consistently placed as a
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          {" "}
+          winner or finalist in 8 national hackathons
+        </span>
+        , a testament to my ability to deliver creative,{" "}
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          high-impact solutions under extreme pressure
+        </span>
+        . My mission is to architect{" "}
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          scalable, production-grade software
+        </span>{" "}
         from ambitious ideas.
       </p>
     </Section>
   );
 }
+
 
 
 
