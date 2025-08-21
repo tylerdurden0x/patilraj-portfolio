@@ -169,17 +169,12 @@ function Hero() {
         
         {/* Left: Intro */}
         <div className="text-left max-w-xl space-y-4">
-          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
-            Hi, I'm
-            <br />
-            <span className="block text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              Raj Patil
-            </span>
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
+            Hi, I'm Raj Patil
+
           </h1>
-          <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-base lg:text-lg leading-relaxed">
-            Building products that scale to lakhs of users. <br />
-            8× National Hackathon Winner / Finalist. <br />
-            Expert in Full Stack, AWS, and GenAI.
+          <p className="text-neutral-900 dark:text-neutral-200 text-lg sm:text-xl lg:text-lg leading-relaxed">
+            Building products that scale to lakhs of users. 8× National Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
           </p>
         </div>
 
