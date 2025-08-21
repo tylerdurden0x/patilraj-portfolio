@@ -326,7 +326,7 @@ function Education() {
     className="block"
   >
     <Card className="flex items-center gap-4 cursor-pointer transition hover:scale-[1.02] hover:shadow-lg">
-      <div className="text-3xl select-none" aria-hidden>
+      <div className="text-3xl shrink-0 select-none" aria-hidden>
         {s.logo}
       </div>
       <div className="flex-1 min-w-0">
@@ -337,7 +337,7 @@ function Education() {
           {s.sub}
         </div>
       </div>
-      <div className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+      <div className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap shrink-0">
         {s.period}
       </div>
     </Card>
