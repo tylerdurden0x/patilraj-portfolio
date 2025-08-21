@@ -159,21 +159,38 @@ const PROJECTS = [
 /* -------------------------------- Views -------------------------------- */
 
 
+/* ---------------- Hero Section ---------------- */
+
+
 function Hero() {
   return (
     <section className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full pt-10 sm:pt-14">
-      <div className="text-left max-w-3xl">
-        <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
-          Hi, I'm
-          <br />
-          <span className="block text-6xl sm:text-7xl font-extrabold tracking-tight">
-            Raj Patil
-          </span>
-        </h1>
-        <p className="mt-5 text-neutral-700 dark:text-neutral-300 text-xl sm:text-2xl leading-relaxed max-w-2xl">
-          Software Engineer scaling products to lakhs of users. 8x National
-          Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
-        </p>
+      <div className="grid grid-cols-2 gap-6 sm:gap-10 items-center">
+        
+        {/* Left: Intro */}
+        <div className="text-left max-w-xl space-y-4">
+          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
+            Hi, I'm
+            <br />
+            <span className="block text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+              Raj Patil
+            </span>
+          </h1>
+          <p className="text-neutral-700 dark:text-neutral-300 text-sm sm:text-base lg:text-lg leading-relaxed">
+            Building products that scale to lakhs of users. <br />
+            8× National Hackathon Winner / Finalist. <br />
+            Expert in Full Stack, AWS, and GenAI.
+          </p>
+        </div>
+
+        {/* Right: PNG */}
+        <div className="flex justify-end">
+          <img
+            src="/raj3d.png"
+            alt="Raj Patil"
+            className="w-28 sm:w-44 md:w-56 lg:w-72 xl:w-80 rounded-2xl shadow-lg"
+          />
+        </div>
       </div>
     </section>
   );
