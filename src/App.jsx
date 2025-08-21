@@ -198,7 +198,7 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-      <p className="max-w-3xl mx-auto text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <p className="max-w-5xl mx-auto text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
         I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
         scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
         <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
