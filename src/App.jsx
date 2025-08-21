@@ -669,8 +669,8 @@ function Dock({ view, dark, setDark }) {
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
         className="bg-white/90 dark:bg-neutral-900/80 backdrop-blur-md shadow-lg
            border border-white/20 dark:border-white/10 rounded-2xl
-           flex items-center justify-between gap-2 px-3 py-2
-           w-full max-w-[95vw] sm:max-w-fit">
+           w-auto max-w-[95vw] sm:max-w-fit overflow-hidden
+           flex items-center justify-between gap-2 px-3 py-2">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Left: Home | Blog */}
           <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
@@ -725,24 +725,27 @@ function Dock({ view, dark, setDark }) {
           <div className="h-5 w-px sm:h-6 bg-black/20 dark:bg-white/30" />
 
           {/* Right: links */}
-          <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
-            {socials.map(({ Icon, label, href }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                title={label}
-                whileHover={{ scale: 1.12, y: -4 }}
-                whileTap={{ scale: 0.96 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="px-5 py-3 rounded-xl inline-flex items-center justify-center text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
-                aria-label={label}
-              >
-                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </motion.a>
-            ))}
-          </div>
+          <div className="flex items-center">
+  {socials.map(({ Icon, label, href }) => (
+    <div key={label} className="min-w-[44px] min-h-[44px] flex items-center justify-center">
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        title={label}
+        whileHover={{ scale: 1.12, y: -4 }}
+        whileTap={{ scale: 0.96 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="px-3 py-2 sm:px-5 sm:py-3 rounded-xl inline-flex items-center justify-center
+                   text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white
+                   hover:bg-black/5 dark:hover:bg-white/10"
+        aria-label={label}
+      >
+        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+      </motion.a>
+    </div>
+  ))}
+</div>
 
           {/* Divider */}
           <div className="h-5 w-px sm:h-6 bg-black/20 dark:bg-white/30" />
@@ -763,6 +766,7 @@ function Dock({ view, dark, setDark }) {
       </motion.nav>
     </div>
   );
+  
 }
 
 
