@@ -516,20 +516,21 @@ function ContactSection() {
       </h2>
 
       {/* Paragraph */}
-      <p className="text-neutral-700 dark:text-neutral-400 mt-6 max-w-5xl mx-auto text-xl sm:text-2xl leading-relaxed">
+      <p className="text-neutral-700 dark:text-neutral-400 mt-6 max-w-full sm:max-w-3xl mx-auto 
+              text-base sm:text-lg leading-relaxed px-4 sm:px-0">
         Want to chat? Feel free to{" "}
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" 
-           className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
-          DM me on LinkedIn
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+          className="inline-block min-h-[44px] px-1 text-blue-600 dark:text-blue-400 font-medium hover:underline">
+        DM me on LinkedIn
         </a>{" "}
         or{" "}
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
-           className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+            className="inline-block min-h-[44px] px-1 text-red-600 dark:text-blue-400 font-medium hover:underline">
           Twitter
         </a>{" "}
         with a direct question, or{" "}
-        <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" 
-           className="text-green-600 dark:text-green-400 font-medium hover:underline">
+        <a href="https://calendly.com" target="_blank" rel="noopener noreferrer"
+       className="inline-block min-h-[44px] px-1 text-green-600 dark:text-blue-400 font-medium hover:underline">
           book a meeting
         </a>{" "}
         if you prefer a scheduled call. I'll respond whenever I can, but I do ignore all soliciting.
@@ -661,24 +662,24 @@ function Dock({ view, dark, setDark }) {
   ];
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
+    <div className="fixed left-1/2 -translate-x-1/2 z-40 bottom-[max(env(safe-area-inset-bottom),0.75rem)]">
       <motion.nav
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
-        className="bg-white/40 dark:bg-neutral-900/40 backdrop-blur-lg shadow-lg 
-           border border-white/20 dark:border-white/10 
-           rounded-xl px-6 py-4 flex items-center gap-4">
+        className="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md shadow-lg
+        border border-white/20 dark:border-white/10 rounded-2xl
+        px-1.5 py-1.5 sm:px-6 sm:py-4 flex items-center justify-center gap-1 sm:gap-4">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Left: Home | Blog */}
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
             <motion.button
               whileHover={{ scale: 1.12, y: -4 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => go("home")}
               className={cx(
-                "relative px-5 py-3 rounded-xl",
+                "relative px-3 py-2 sm:px-5 sm:py-3 rounded-lg",
                 view === "home"
                   ? "bg-black/20 dark:bg-white/20 text-black dark:text-white"
                   : "text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
@@ -686,7 +687,7 @@ function Dock({ view, dark, setDark }) {
               aria-label="Home"
               title="Home"
             >
-              <Home className="w-7 h-7" />
+              <Home className="w-5 h-5 sm:w-6 sm:h-6" />
               {view === "home" && (
               <motion.span
                 layoutId="dock-dot"
@@ -701,7 +702,7 @@ function Dock({ view, dark, setDark }) {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => go("blog")}
               className={cx(
-                "relative px-5 py-3 rounded-xl",
+                "relative px-3 py-2 sm:px-5 sm:py-3 rounded-lg",
                 view === "blog"
                   ? "bg-black/20 dark:bg-white/20 text-black dark:text-white"
                   : "text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
@@ -709,7 +710,7 @@ function Dock({ view, dark, setDark }) {
               aria-label="Blog"
               title="Blog"
             >
-              <Notebook className="w-5 h-5" />
+              <Notebook className="w-5 h-5 sm:w-6 sm:h-6" />
               {view === "blog" && (
               <motion.span
               layoutId="dock-dot"
@@ -720,10 +721,10 @@ function Dock({ view, dark, setDark }) {
           </div>
 
           {/* Divider */}
-          <div className="h-6 w-px bg-black/20 dark:bg-white/30" />
+          <div className="h-5 w-px sm:h-6 bg-black/20 dark:bg-white/30" />
 
           {/* Right: links */}
-          <div className="flex items-center gap-1 sm:gap-1.5">
+          <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
             {socials.map(({ Icon, label, href }) => (
               <motion.a
                 key={label}
@@ -737,13 +738,13 @@ function Dock({ view, dark, setDark }) {
                 className="px-5 py-3 rounded-xl inline-flex items-center justify-center text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
                 aria-label={label}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </motion.a>
             ))}
           </div>
 
           {/* Divider */}
-          <div className="h-6 w-px bg-black/20 dark:bg-white/30" />
+          <div className="h-5 w-px sm:h-6 bg-black/20 dark:bg-white/30" />
 
           {/* Theme toggle */}
           <motion.button
@@ -751,11 +752,11 @@ function Dock({ view, dark, setDark }) {
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             onClick={() => setDark((d) => !d)}
-            className="px-5 py-3 rounded-xl inline-flex items-center justify-center text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+            className="px-3 py-2 sm:px-5 sm:py-3 rounded-lg inline-flex items-center justify-center text-neutral-600 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
             title="Toggle theme"
             aria-label="Toggle theme"
           >
-            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {dark ? <Sun className="w-5 h-5 sm:w-6 sm:h-6" /> : <Moon className="w-5 h-5 sm:w-6 sm:h-6" />}
           </motion.button>
         </div>
       </motion.nav>
