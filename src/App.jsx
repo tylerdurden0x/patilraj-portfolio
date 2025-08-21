@@ -198,16 +198,16 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-  <p className="max-w-5xl mx-auto w-full px-6 pt-10 sm:pt-14">
-    I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
-    scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
-    <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
-    <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
-    deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>.
-    My mission is to architect <span className="font-semibold">scalable, production-grade software</span>
-    from ambitious ideas.
-  </p>
-</Section>
+      <p className="max-w-3xl mx-auto text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+        I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
+        scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
+        <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
+        <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
+        deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>.
+        My mission is to architect <span className="font-semibold">scalable, production-grade software</span>
+        from ambitious ideas.
+      </p>
+   </Section>
   );
 }
 
