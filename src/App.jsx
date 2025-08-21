@@ -325,23 +325,23 @@ function Education() {
     rel="noopener noreferrer"
     className="block"
   >
-    <Card className="flex items-center gap-4 cursor-pointer transition hover:scale-[1.02] hover:shadow-lg">
-  <div className="text-3xl select-none" aria-hidden>
-    {s.logo}
-  </div>
-  <div className="flex-1 min-w-0">
-    <div className="font-semibold text-neutral-900 dark:text-white truncate">
-      {s.name}
-    </div>
-    <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
-      {s.sub}
-    </div>
-  </div>
-  <div className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
-    {s.period}
-  </div>
-</Card>
+    <Card className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 cursor-pointer transition hover:scale-[1.02] hover:shadow-lg">
+      <div className="text-3xl shrink-0 select-none" aria-hidden>
+        {s.logo}
+      </div>
 
+      <div className="flex-1 min-w-0">
+        <div className="font-semibold text-neutral-900 dark:text-white">
+          {s.name}
+        </div>
+        <div className="text-sm text-neutral-500 dark:text-neutral-400">
+          {s.sub}
+        </div>
+      </div>
+        <div className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap shrink-0">
+          {s.period}
+        </div>
+    </Card>
   </a>
 ))}
 
