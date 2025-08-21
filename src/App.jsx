@@ -32,7 +32,7 @@ function IconX(props) {
 const Section = ({ id, title, children }) => (
   <section
     id={id}
-    className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full"
+    className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12"
   >
     <h2 className="text-neutral-900 dark:text-neutral-100 text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 sm:mb-6">
       {title}
@@ -159,24 +159,24 @@ const PROJECTS = [
 function Hero() {
   return (
     <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
-      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10">
-        <div className="flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start gap-6 sm:gap-10">
+        <div className="flex-1 min-w-0">
           <h1 className="text-2xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
             Hi, I'm Raj 
           </h1>
-          <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-2xl">
+          <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-[36ch] sm:max-w-[52ch]">
             Software Engineer scaling products to lakhs of users. 8x National
             Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
           </p>
         </div>
 
         {/* Avatar / Decorative */}
-        <div className="block sm:block">
+        <div className="hidden sm:block justify-self-end">
           <motion.div
             initial={{ rotate: -8, y: -6, opacity: 0 }}
             animate={{ rotate: 0, y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            className="relative w-20 h-20 sm:w-32 sm:h-32 mt-6 sm:mt-0"
+            className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mt-6 sm:mt-0"
           >
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-black/10 to-black/0 dark:from-white/15 dark:to-white/0 ring-1 ring-black/10 dark:ring-white/20" />
             <div className="absolute inset-[6px] rounded-2xl bg-white dark:bg-neutral-900 grid place-items-center text-5xl">
