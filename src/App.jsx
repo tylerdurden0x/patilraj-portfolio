@@ -158,7 +158,7 @@ const PROJECTS = [
 /* -------------------------------- Views -------------------------------- */
 function Hero() {
   return (
-    <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
+    <div className="max-w-5xl mx-auto w-full px-6 pt-10 sm:pt-14">
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-8">
         <div className="flex-1 min-w-0">
           <h1 className="text-3xl sm:text-5xl font-bold text-neutral-900 dark:text-white">
@@ -198,7 +198,7 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-  <p className="max-w-2xl text-base sm:text-lg leading-relaxed">
+  <p className="max-w-5xl mx-auto w-full px-6 pt-10 sm:pt-14">
     I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
     scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
     <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
