@@ -162,7 +162,7 @@ function Hero() {
       <div className="flex items-start gap-6 sm:gap-10">
         <div className="flex-1">
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
-            Hi, I'm Divyansh
+            Hi, I'm Raj Patil
           </h1>
           <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-2xl">
             Software Engineer scaling products to lakhs of users. 8x National
