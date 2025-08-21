@@ -32,7 +32,7 @@ function IconX(props) {
 const Section = ({ id, title, children }) => (
   <section
     id={id}
-    className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12"
+    className="max-w-5xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 mt-8 sm:mt-10"
   >
     <h2 className="text-neutral-900 dark:text-neutral-100 text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 sm:mb-6">
       {title}
@@ -42,6 +42,7 @@ const Section = ({ id, title, children }) => (
     </div>
   </section>
 );
+
 
 
 const Card = ({
@@ -156,39 +157,28 @@ const PROJECTS = [
 
 
 /* -------------------------------- Views -------------------------------- */
+
+
 function Hero() {
   return (
-    <div className="max-w-5xl mx-auto w-full px-6 pt-10 sm:pt-14">
-      <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-8">
-        <div className="flex-1 min-w-0">
-          <h1 className="text-3xl sm:text-5xl font-bold text-neutral-900 dark:text-white">
+    <div className="relative max-w-6xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14 pr-24 sm:pr-0">
+      <div className="block">
+        
+        {/* Left Content */}
+        <div className="flex-1">
+          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
             Hi, I'm
             <br />
-            <span className="text-3xl sm:text-6xl font-extrabold tracking-tight">
+            <span className="block text-6xl sm:text-7xl font-extrabold tracking-tight">
               Raj Patil
             </span>
           </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-lg sm:text-xl max-w-md">
+          <p className="mt-5 text-neutral-700 dark:text-neutral-300 text-xl sm:text-2xl leading-relaxed max-w-4xl">
             Software Engineer scaling products to lakhs of users. 8x National
             Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
           </p>
         </div>
-
-        {/* Avatar / Decorative */}
-        <div className="flex justify-center sm:justify-end">
-          <motion.div
-            initial={{ rotate: -8, y: -6, opacity: 0 }}
-            animate={{ rotate: 0, y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36"
-          >
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-black/10 to-black/0 dark:from-white/15 dark:to-white/0 ring-1 ring-black/10 dark:ring-white/20" />
-            <div className="absolute inset-[6px] rounded-2xl bg-white dark:bg-neutral-900 grid place-items-center text-5xl">
-              👋🏻
-            </div>
-          </motion.div>
-
-        </div>
+        
       </div>
     </div>
   );
@@ -199,21 +189,19 @@ function Hero() {
 function About() {
   return (
     <Section id="about" title="About">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-          I'm a <span className="font-semibold">Founding Engineer</span> driven by building products 
-          that scale to <span className="font-semibold">lakhs of users</span>. 
-          I've shipped over <span className="font-semibold">10 commercial projects</span> and have 
-          consistently placed as a <span className="font-semibold">winner or finalist in 8 national hackathons</span>, 
-          a testament to my ability to deliver creative, 
-          <span className="font-semibold"> high-impact solutions under extreme pressure</span>. 
-          My mission is to architect <span className="font-semibold">scalable, production-grade software</span> 
-          from ambitious ideas.
-        </p>
-      </div>
+      <p className="max-w-[65ch] text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+        I'm a <span className="font-semibold">Founding Engineer</span> driven by building products that
+        scale to <span className="font-semibold">lakhs of users</span>. I've shipped over
+        <span className="font-semibold"> 10 commercial projects</span> and have consistently placed as a
+        <span className="font-semibold"> winner or finalist in 8 national hackathons</span>, a testament to my ability to
+        deliver creative, <span className="font-semibold">high-impact solutions under extreme pressure</span>. My mission
+        is to architect <span className="font-semibold">scalable, production-grade software</span>{" "}
+        from ambitious ideas.
+      </p>
     </Section>
   );
 }
+
 
 
 
