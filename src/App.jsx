@@ -161,28 +161,25 @@ const PROJECTS = [
 
 function Hero() {
   return (
-    <div className="relative max-w-6xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14 pr-24 sm:pr-0">
-      <div className="block">
-        
-        {/* Left Content */}
-        <div className="flex-1">
-          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
-            Hi, I'm
-            <br />
-            <span className="block text-6xl sm:text-7xl font-extrabold tracking-tight">
-              Raj Patil
-            </span>
-          </h1>
-          <p className="mt-5 text-neutral-700 dark:text-neutral-300 text-xl sm:text-2xl leading-relaxed max-w-4xl">
-            Software Engineer scaling products to lakhs of users. 8x National
-            Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
-          </p>
-        </div>
-        
+    <section className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full pt-10 sm:pt-14">
+      <div className="text-left max-w-3xl">
+        <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
+          Hi, I'm
+          <br />
+          <span className="block text-6xl sm:text-7xl font-extrabold tracking-tight">
+            Raj Patil
+          </span>
+        </h1>
+        <p className="mt-5 text-neutral-700 dark:text-neutral-300 text-xl sm:text-2xl leading-relaxed max-w-2xl">
+          Software Engineer scaling products to lakhs of users. 8x National
+          Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
+        </p>
       </div>
-    </div>
+    </section>
   );
 }
+
+
 
 
 /* ---------------- About Section ---------------- */
