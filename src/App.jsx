@@ -158,10 +158,10 @@ const PROJECTS = [
 /* -------------------------------- Views -------------------------------- */
 function Hero() {
   return (
-    <div className="max-w-5xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
+    <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-10 sm:pt-14">
       <div className="flex items-start gap-6 sm:gap-10">
         <div className="flex-1">
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
+          <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
             Hi, I'm Raj 
           </h1>
           <p className="text-neutral-700 dark:text-neutral-300 mt-4 sm:mt-5 text-lg sm:text-xl max-w-2xl">
@@ -616,7 +616,7 @@ function BlogView() {
   }, [q]);
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-12 sm:pt-16">
+    <div className="max-w-[90vw] sm:max-w-3xl mx-auto w-full px-5 sm:px-8 md:px-10 lg:px-12 pt-12 sm:pt-16">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
@@ -662,14 +662,15 @@ function Dock({ view, dark, setDark }) {
   ];
 
   return (
-    <div className="fixed inset-x-0 bottom-2 z-40 flex justify-center px-2">
+    <div className="fixed inset-x-0 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-2">
       <motion.nav
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
         className="bg-white/90 dark:bg-neutral-900/80 backdrop-blur-md shadow-lg
-                 border border-white/20 dark:border-white/10 rounded-2xl
-                 w-auto max-w-md sm:max-w-fit flex items-center justify-between gap-2 px-4 py-2">
+           border border-white/20 dark:border-white/10 rounded-2xl
+           flex items-center justify-between gap-2 px-3 py-2
+           w-full max-w-[95vw] sm:max-w-fit">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Left: Home | Blog */}
           <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">

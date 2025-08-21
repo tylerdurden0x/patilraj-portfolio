@@ -13,3 +13,23 @@ html {
 /* Light/Dark outline */
 :focus-visible { outline: 2px solid rgba(0,0,0,0.5); outline-offset: 2px; }
 .dark :focus-visible { outline-color: rgba(255,255,255,0.6); }
+
+/* === Mobile Fixes === */
+html, body {
+  margin: 0;
+  overflow-x: hidden; /* prevent sideways scroll */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Keep images/videos inside screen */
+img, video, iframe, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Root app always fits full height of device */
+#root {
+  min-height: 100dvh;
+}
