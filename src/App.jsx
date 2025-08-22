@@ -731,13 +731,14 @@ function BlogView() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search posts..."
-            className="w-full sm:w-[560px] px-5 py-3 rounded-2xl
-                       bg-white/60 dark:bg-neutral-900/60
-                       ring-1 ring-black/10 dark:ring-white/10
-                       backdrop-blur supports-[backdrop-filter]:backdrop-blur-md
-                       text-neutral-900 dark:text-neutral-100
-                       placeholder:text-neutral-500
-                       focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/25"
+            className=" w-full max-w-xl mx-auto mt-6 px-4 py-3
+                    rounded-2xl
+                    bg-transparent
+                    border border-neutral-500 dark:border-neutral-600   /* stronger border */
+                    text-neutral-900 dark:text-white
+                    placeholder-neutral-500 dark:placeholder-neutral-400
+                    focus:outline-none focus:ring-2 focus:ring-blue-500
+                    shadow-sm dark:shadow-md  /* subtle depth */"
           />
         </div>
       </div>
@@ -801,9 +802,12 @@ function BlogView() {
                     .trim()}
                 </p>
 
-                <div className="mt-4 inline-flex items-center gap-2 text-sm font-medium
-                                text-blue-600 dark:text-blue-400">
-                  <Globe className="h-4 w-4" />
+                <div className="inline-flex items-center gap-2 px-6 py-2 mt-4 rounded-xl font-medium
+                  bg-neutral-900 text-white
+                  dark:bg-white dark:text-neutral-900
+                  ring-1 ring-black/10 dark:ring-white/15
+                  transition hover:scale-105 hover:shadow-md">
+                  <Globe className="w-4 h-4" />
                   Read Post
                 </div>
               </div>
