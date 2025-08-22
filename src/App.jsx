@@ -66,10 +66,22 @@ const Card = ({
 
 /* -------------------------------- Data --------------------------------- */
 const EXPERIENCES = [
-  { company: "Cognizant Inc.", role: "Programmer Analyst", start: "July 2022", end: "Present", logo: "/ctslogo.png", details: "Led core platform, shipped multi-tenant infra, observability, and CI/CD." },
-  { company: "Modulus", role: "Founding Full-Stack Engineer", start: "Apr 2025", end: "Aug 2025", logo: "🟢", details: "Built dashboard, auth, and payments. Reduced TTFB by 35%." },
-  { company: "Showtime", role: "Backend Engineer Intern", start: "Feb 2025", end: "Jun 2025", logo: "🍿", details: "Designed queue-based ingestion, added metrics & alerts." },
-  { company: "Code Inbound", role: "Frontend Engineer", start: "Sep 2024", end: "Feb 2025", logo: "🧠", details: "Implemented design system and SSR routing, improved LCP." },
+  { company: "Cognizant Inc.", role: "Programmer Analyst", start: "July 2022", end: "Present", logo: "/ctslogo.png", details:  [
+      "Led data management and querying initiatives for retail sector projects within Cognizant Digital Business (CDB) AI and Analytics domain",
+      "Developed and implemented complex SQL queries to solve critical business problems, optimizing data retrieval and analysis processes",
+      "Leveraged advanced technologies including RDBMS, SQL, DBT, Python, ETL processes, and Microsoft BI tools to deliver comprehensive data solutions",
+      "Built interactive dashboards and reports using Power BI, transforming raw data into actionable insights for stakeholders across retail operations"
+    ] },
+  { company: "Cognizant Inc.", role: "Microsoft BI Intern", start: "Jan 2022", end: "July 2022", logo: "/ctslogo.png", details: [
+    "Completed paid internship during final semester, receiving comprehensive training in Microsoft BI technologies including MySQL, SSMS, SSIS, SSAS, and SSRS.",
+    "Developed data visualization dashboards using Power BI and implemented data ingestion pipelines with Azure Data Factory during internship.",
+    "Gained practical experience with ETL processes, database management, and business intelligence reporting solutions."
+  ] },
+  { company: "The Sparks Foundation", role: "DS & Business Analyst", start: "Aug 2021", end: "Oct 2021", logo: "/sparkj.png", details: "Worked on data analysis, predictive modeling, and visualization tasks as part of real-world projects during my Data Science & Business Analyst internship at The Sparks Foundation." },
+  { company: "Chegg Inc.", role: "Managed Network Expert", start: "Oct 2020", end: "Dec 2020", logo: "/cheggj.png", details: [
+    "Experts answer questions asked by students, following quality parameters defined by Chegg while ensuring academic integrity.",
+    "Promoted Chegg expert program among peers and assisted them with expert-related queries through online web meetings."
+  ] },
 ];
 
 
@@ -286,16 +298,24 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       </div>
 
       {/* Collapsible details */}
-      <div
-        className={cx(
-          "grid transition-all duration-500 ease-out",
-          isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
-        )}
-      >
-        <div className="overflow-hidden text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          {e.details}
-        </div>
-      </div>
+<div
+  className={cx(
+    "grid transition-all duration-500 ease-out",
+    isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
+  )}
+>
+  <div className="overflow-hidden text-neutral-700 dark:text-neutral-300 leading-relaxed">
+    {Array.isArray(e.details) ? (
+      <ul className="list-disc list-inside space-y-1">
+        {e.details.map((point, idx) => (
+          <li key={idx}>{point}</li>
+        ))}
+      </ul>
+    ) : (
+      e.details
+    )}
+  </div>
+</div>
     </Card>
   );
 }
