@@ -258,7 +258,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       role="button"
       aria-expanded={isOpen}
     >
-      <div className="flex flex-col space-y-3">
+      <div className="flex flex-col items-start space-y-2">
         {/* Logo */}
         <div className="shrink-0 select-none" aria-hidden>
           {isImage ? (
@@ -272,19 +272,18 @@ function ExperienceItem({ e, isOpen, onToggle }) {
           )}
         </div>
 
-        {/* Company / Role + Dates */}
-        <div className="flex items-start justify-between w-full">
-          <div className="flex flex-col">
-            <div className="font-semibold text-neutral-900 dark:text-white truncate">
-              {e.company}
-            </div>
-            <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
-              {e.role}
-            </div>
+        {/* Text block */}
+        <div className="w-full">
+          <div className="font-semibold text-neutral-900 dark:text-white truncate">
+            {e.company}
+          </div>
+          <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
+            {e.role}
           </div>
 
-          <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
-            <span>
+          {/* Dates + Chevron */}
+          <div className="flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+            <span className="whitespace-nowrap">
               {e.start} - {e.end}
             </span>
             <ChevronDown
@@ -321,7 +320,6 @@ function ExperienceItem({ e, isOpen, onToggle }) {
     </Card>
   );
 }
-
 
 
 
