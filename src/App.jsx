@@ -580,7 +580,7 @@ function ContactSection() {
         <span>
           Want to chat? Feel free to{" "}
           <a
-            href="https://www.linkedin.com"
+            href="https://www.linkedin.com/in/thisisrajpatil"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
@@ -593,7 +593,7 @@ function ContactSection() {
         <span>
           You can also message me on{" "}
           <a
-            href="https://twitter.com"
+            href="https://x.com/praajhere"
             target="_blank"
             rel="noopener noreferrer"
             className="text-red-600 dark:text-red-400 font-medium hover:underline"
@@ -860,9 +860,9 @@ function Dock({ view, dark, setDark }) {
   };
 
   const socials = [
-    { label: "GitHub", Icon: Github, href: "https://github.com/" },
-    { label: "LinkedIn", Icon: Linkedin, href: "https://www.linkedin.com/" },
-    { label: "X", Icon: IconX, href: "https://x.com/" },
+    { label: "GitHub", Icon: Github, href: "https://github.com/tylerdurden0x" },
+    { label: "LinkedIn", Icon: Linkedin, href: "https://www.linkedin.com/in/thisisrajpatil" },
+    { label: "X", Icon: IconX, href: "https://x.com/praajhere" },
   ];
 
   return (
