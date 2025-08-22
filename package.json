@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.6",
+    "@vercel/analytics": "^1.5.0",
     "express": "^5.1.0",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.462.0",
