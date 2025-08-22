@@ -362,7 +362,7 @@ function Experience() {
 function Education() {
   const schools = [
     {
-    name: "Dr. DY Patil Institute of Technology, Pimpri, Pune",
+    name: "Dr. DY Patil Institute of Technology, Pimpri, Pune (SPPU)",
     sub: "B.E, Mechanical Engineering (CGPA: 8.65)",
     period: "2018 - 2022",
     logo: "🎓",
