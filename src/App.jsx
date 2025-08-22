@@ -258,20 +258,22 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       role="button"
       aria-expanded={isOpen}
     >
-      <div className="flex items-center gap-3 sm:gap-4">
+      {/* Row (Logo + Info + Dates) */}
+      <div className="flex items-center gap-3 sm:gap-4 w-full overflow-hidden">
         {/* Render image if PNG, else fallback to emoji */}
         <div className="shrink-0 select-none" aria-hidden>
           {isImage ? (
             <img
               src={e.logo}
               alt={e.company}
-              className="h-10 w-10 object-contain rounded flex-shrink-0"
+              className="h-10 w-10 object-contain rounded flex-shrink-0 sm:h-10 sm:w-10 h-8 w-8"
             />
           ) : (
-            <span className="text-3xl">{e.logo}</span>
+            <span className="text-2xl sm:text-3xl">{e.logo}</span>
           )}
         </div>
 
+        {/* Company + Role */}
         <div className="flex-1 min-w-0">
           <div className="font-semibold text-neutral-900 dark:text-white truncate">
             {e.company}
@@ -281,8 +283,11 @@ function ExperienceItem({ e, isOpen, onToggle }) {
           </div>
         </div>
 
+        {/* Dates + Chevron */}
         <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap shrink-0">
-          <span>{e.start} - {e.end}</span>
+          <span>
+            {e.start} - {e.end}
+          </span>
           <ChevronDown
             className={cx(
               "w-4 h-4 transition-transform duration-500",
@@ -293,24 +298,26 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       </div>
 
       {/* Collapsible details */}
-<div
-  className={cx(
-    "grid transition-all duration-500 ease-out",
-    isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
-  )}
->
-  <div className="overflow-hidden text-neutral-700 dark:text-neutral-300 leading-relaxed">
-    {Array.isArray(e.details) ? (
-      <ul className="list-disc list-inside space-y-1">
-        {e.details.map((point, idx) => (
-          <li key={idx}>{point}</li>
-        ))}
-      </ul>
-    ) : (
-      e.details
-    )}
-  </div>
-</div>
+      <div
+        className={cx(
+          "grid transition-all duration-500 ease-out",
+          isOpen
+            ? "grid-rows-[1fr] opacity-100 mt-3"
+            : "grid-rows-[0fr] opacity-0 mt-0"
+        )}
+      >
+        <div className="overflow-hidden text-neutral-700 dark:text-neutral-300 leading-relaxed">
+          {Array.isArray(e.details) ? (
+            <ul className="list-disc list-inside space-y-1">
+              {e.details.map((point, idx) => (
+                <li key={idx}>{point}</li>
+              ))}
+            </ul>
+          ) : (
+            e.details
+          )}
+        </div>
+      </div>
     </Card>
   );
 }
