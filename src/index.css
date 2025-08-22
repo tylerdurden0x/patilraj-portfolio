@@ -33,7 +33,3 @@ img, video, iframe, canvas {
 #root {
   min-height: 100dvh;
 }
-
-html, body {
-  @apply bg-white dark:bg-black;
-}

@@ -66,7 +66,7 @@ const Card = ({
 
 /* -------------------------------- Data --------------------------------- */
 const EXPERIENCES = [
-  { company: "MarkupX", role: "Founding Engineer", start: "Aug 2025", end: "Present", logo: "🧩", details: "Led core platform, shipped multi-tenant infra, observability, and CI/CD." },
+  { company: "Cognizant Inc.", role: "Programmer Analyst", start: "July 2022", end: "Present", logo: "/ctslogo.png", details: "Led core platform, shipped multi-tenant infra, observability, and CI/CD." },
   { company: "Modulus", role: "Founding Full-Stack Engineer", start: "Apr 2025", end: "Aug 2025", logo: "🟢", details: "Built dashboard, auth, and payments. Reduced TTFB by 35%." },
   { company: "Showtime", role: "Backend Engineer Intern", start: "Feb 2025", end: "Jun 2025", logo: "🍿", details: "Designed queue-based ingestion, added metrics & alerts." },
   { company: "Code Inbound", role: "Frontend Engineer", start: "Sep 2024", end: "Feb 2025", logo: "🧠", details: "Implemented design system and SSR routing, improved LCP." },
@@ -239,6 +239,8 @@ function About() {
 
 
 function ExperienceItem({ e, isOpen, onToggle }) {
+  const isImage = typeof e.logo === "string" && e.logo.endsWith(".png");
+
   return (
     <Card
       className={cx(
@@ -250,8 +252,17 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       aria-expanded={isOpen}
     >
       <div className="flex items-center gap-3 sm:gap-4">
-        <div className="text-3xl select-none shrink-0" aria-hidden>
-          {e.logo}
+        {/* Render image if PNG, else fallback to emoji */}
+        <div className="shrink-0 select-none" aria-hidden>
+          {isImage ? (
+            <img
+              src={e.logo}
+              alt={e.company}
+              className="h-10 w-10 object-contain rounded"
+            />
+          ) : (
+            <span className="text-3xl">{e.logo}</span>
+          )}
         </div>
 
         <div className="flex-1 min-w-0">
@@ -274,7 +285,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
         </div>
       </div>
 
-      {/* Smooth collapsible details */}
+      {/* Collapsible details */}
       <div
         className={cx(
           "grid transition-all duration-500 ease-out",
@@ -288,6 +299,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
     </Card>
   );
 }
+
 
 
 function Experience() {
