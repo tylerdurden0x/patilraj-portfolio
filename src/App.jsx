@@ -265,7 +265,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
             <img
               src={e.logo}
               alt={e.company}
-              className="h-10 w-10 object-contain rounded"
+              className="h-10 w-10 object-contain rounded flex-shrink-0"
             />
           ) : (
             <span className="text-3xl">{e.logo}</span>
@@ -273,10 +273,10 @@ function ExperienceItem({ e, isOpen, onToggle }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="font-semibold text-neutral-900 dark:text-white">
+          <div className="font-semibold text-neutral-900 dark:text-white truncate">
             {e.company}
           </div>
-          <div className="text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
             {e.role}
           </div>
         </div>
