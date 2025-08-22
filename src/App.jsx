@@ -243,6 +243,8 @@ function About() {
 
 
 
+
+
 function ExperienceItem({ e, isOpen, onToggle }) {
   const isImage = typeof e.logo === "string" && e.logo.endsWith(".png");
 
@@ -257,7 +259,7 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       aria-expanded={isOpen}
     >
       {/* Row (Logo + Info + Dates) */}
-      <div className="flex items-center gap-3 sm:gap-4 w-full overflow-hidden">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
         {/* Logo */}
         <div className="shrink-0 select-none" aria-hidden>
           {isImage ? (
@@ -282,11 +284,11 @@ function ExperienceItem({ e, isOpen, onToggle }) {
         </div>
 
         {/* Dates + Chevron */}
-        <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 shrink-0 max-w-[40%] sm:max-w-none truncate text-right">
-          <span className="truncate">{e.start} - {e.end}</span>
+        <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 mt-2 sm:mt-0">
+          <span>{e.start} - {e.end}</span>
           <ChevronDown
             className={cx(
-              "w-4 h-4 transition-transform duration-500 shrink-0",
+              "w-4 h-4 transition-transform duration-500",
               isOpen ? "rotate-180" : "rotate-0"
             )}
           />
