@@ -176,33 +176,34 @@ const PROJECTS = [
 
 function Hero() {
   return (
-    <section className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full pt-10 sm:pt-14">
-      <div className="grid grid-cols-2 gap-6 sm:gap-10 items-center">
-        
-        {/* Left: Intro */}
-        <div className="text-left max-w-xl space-y-4">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
-  Hi, I'm
-  <br />
-  <span className="block text-4xl sm:text-6xl lg:text-7xl font-extrabold">
-    Raj Patil
-  </span>
-</h1>
-          <p className="text-neutral-900 dark:text-neutral-200 text-lg sm:text-xl lg:text-lg leading-relaxed">
-            Quietly building autonomous systems that don't need daily standups | Agents x Ops | Some tools I’m working on aren’t public yet…
-          </p>
-        </div>
+    <section className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full pt-8 sm:pt-14">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 items-center">
+    
+    {/* Left: Intro */}
+    <div className="text-center sm:text-left max-w-xl space-y-4">
+      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-tight">
+        Hi, I'm
+        <br />
+        <span className="block text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Raj Patil
+        </span>
+      </h1>
+      <p className="text-neutral-700 dark:text-neutral-200 text-base sm:text-lg lg:text-lg leading-relaxed">
+        Quietly building autonomous systems that don't need daily standups | Agents x Ops | Some tools I’m working on aren’t public yet…
+      </p>
+    </div>
 
-        {/* Right: PNG */}
-        <div className="flex justify-end">
-          <img
-            src="/raj3d.png"
-            alt="Raj Patil"
-            className="w-28 sm:w-44 md:w-56 lg:w-72 xl:w-80 rounded-2xl shadow-lg"
-          />
-        </div>
-      </div>
-    </section>
+    {/* Right: PNG */}
+    <div className="flex justify-center sm:justify-end mt-6 sm:mt-0">
+      <img
+        src="/raj3d.png"
+        alt="Raj Patil"
+        className="w-28 sm:w-44 md:w-56 lg:w-72 xl:w-80 rounded-2xl shadow-lg"
+      />
+    </div>
+  </div>
+</section>
+
   );
 }
 
