@@ -258,9 +258,11 @@ function ExperienceItem({ e, isOpen, onToggle }) {
       role="button"
       aria-expanded={isOpen}
     >
-      <div className="flex flex-col items-start space-y-2">
+      {/* Wrapper flex: column on mobile, row on desktop */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+        
         {/* Logo */}
-        <div className="shrink-0 select-none" aria-hidden>
+        <div className="shrink-0 select-none mb-2 sm:mb-0" aria-hidden>
           {isImage ? (
             <img
               src={e.logo}
@@ -272,18 +274,21 @@ function ExperienceItem({ e, isOpen, onToggle }) {
           )}
         </div>
 
-        {/* Text block */}
-        <div className="w-full">
-          <div className="font-semibold text-neutral-900 dark:text-white truncate">
-            {e.company}
-          </div>
-          <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
-            {e.role}
+        {/* Text + Dates */}
+        <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          {/* Company + Role */}
+          <div className="min-w-0">
+            <div className="font-semibold text-neutral-900 dark:text-white truncate">
+              {e.company}
+            </div>
+            <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
+              {e.role}
+            </div>
           </div>
 
           {/* Dates + Chevron */}
-          <div className="flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-            <span className="whitespace-nowrap">
+          <div className="flex items-center justify-between sm:justify-end gap-1 text-sm text-neutral-500 dark:text-neutral-400 mt-1 sm:mt-0 whitespace-nowrap">
+            <span>
               {e.start} - {e.end}
             </span>
             <ChevronDown
