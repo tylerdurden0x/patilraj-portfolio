@@ -700,15 +700,19 @@ function BlogView() {
     <section className="relative bg-transparent w-full">
       {/* Top: pill + big heading + subtitle */}
       <div className="max-w-5xl mx-auto px-4 pt-10 sm:pt-14 text-center">
-        <div
-          className="inline-flex items-center justify-center px-6 py-2 rounded-2xl
-                     bg-black/5 dark:bg-white/5 ring-1 ring-black/10 dark:ring-white/10
-                     backdrop-blur supports-[backdrop-filter]:backdrop-blur-md select-none"
-        >
-          <span className="text-base font-semibold text-neutral-800 dark:text-neutral-200">
-            My Posts
-          </span>
-        </div>
+        <div className="max-w-5xl mx-auto px-4 pt-10 sm:pt-14 text-center">
+  <span
+    className="
+      inline-block px-8 py-3 rounded-xl text-2xl font-medium
+      bg-neutral-900 text-white
+      dark:bg-white dark:text-neutral-900
+      ring-1 ring-black/10 dark:ring-white/15
+    "
+  >
+    My Posts
+  </span>
+</div>
+
 
         <h1
           className="mt-5 text-4xl sm:text-6xl font-extrabold tracking-tight
