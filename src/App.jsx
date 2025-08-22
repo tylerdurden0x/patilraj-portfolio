@@ -453,7 +453,9 @@ function Skills() {
 
 function ProjectCard({ p }) {
   return (
-    <Card className="p-0 overflow-hidden">
+    <Card
+      className="p-0 overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl"
+    >
       {/* Vimeo preview */}
       <div className="aspect-video">
         <iframe
@@ -519,6 +521,7 @@ function ProjectCard({ p }) {
     </Card>
   );
 }
+
 
 function ProjectsSection() {
   return (
