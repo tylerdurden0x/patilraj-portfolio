@@ -189,7 +189,7 @@ function Hero() {
   </span>
 </h1>
           <p className="text-neutral-900 dark:text-neutral-200 text-lg sm:text-xl lg:text-lg leading-relaxed">
-            Building products that scale to lakhs of users. 8× National Hackathon Winner / Finalist. Expert in Full Stack, AWS, and GenAI.
+            Quietly building autonomous systems that don't need daily standups | Agents x Ops | Some tools I’m working on aren’t public yet…
           </p>
         </div>
 
@@ -214,34 +214,29 @@ function About() {
   return (
     <Section id="about" title="About">
       <p className="max-w-[65ch] text-base sm:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
-        I'm a{" "}
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          Founding Engineer
-        </span>{" "}
-        driven by building products that scale to{" "}
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          lakhs of users
-        </span>
-        . I've shipped over
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          {" "}
-          10 commercial projects
-        </span>{" "}
-        and have consistently placed as a
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          {" "}
-          winner or finalist in 8 national hackathons
-        </span>
-        , a testament to my ability to deliver creative,{" "}
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          high-impact solutions under extreme pressure
-        </span>
-        . My mission is to architect{" "}
-        <span className="font-semibold text-neutral-900 dark:text-white">
-          scalable, production-grade software
-        </span>{" "}
-        from ambitious ideas.
-      </p>
+  I'm an{" "}
+  <span className="font-semibold text-neutral-900 dark:text-white">
+    Aspiring Machine Learning Engineer
+  </span>{" "}
+  with experience in{" "}
+  <span className="font-semibold text-neutral-900 dark:text-white">
+    SQL, Python, and analytics
+  </span>{" "}
+  at{" "}
+  <span className="font-semibold text-neutral-900 dark:text-white">
+    Cognizant
+  </span>
+  . Holder of{" "}
+  <span className="font-semibold text-neutral-900 dark:text-white">
+    IBM and Microsoft certifications
+  </span>
+  . Passionate about{" "}
+  <span className="font-semibold text-neutral-900 dark:text-white">
+    machine learning, business intelligence, and data-driven solutions
+  </span>
+  .
+</p>
+
     </Section>
   );
 }
@@ -350,18 +345,18 @@ function Experience() {
 function Education() {
   const schools = [
     {
-    name: "Maharaja Surajmal Institute of Technology",
-    sub: "B.Tech, Information Technology (CGPA: 8.8)",
-    period: "2023 - 2027",
+    name: "Dr. DY Patil Institute of Technology, Pimpri, Pune",
+    sub: "B.E, Mechanical Engineering (CGPA: 8.65)",
+    period: "2018 - 2022",
     logo: "🎓",
-    link: "https://www.msit.in",   // 👈 add link here
+    link: "https://engg.dypvp.edu.in/",   // 👈 add link here
   },
   {
-    name: "Geek Room MSIT Chapter",
-    sub: "Head of Development (Community of 25,000+)",
-    period: "Sept 2023 - Present",
+    name: "DevFest",
+    sub: "Member (Community of over 16k+)",
+    period: "July 2020 - March 2022",
     logo: "🧑‍💻",
-    link: "https://geekroom.in",   // 👈 add link here
+    link: "https://engg.dypvp.edu.in/",   // 👈 add link here
   },
   ];
   return (
@@ -406,18 +401,18 @@ function Education() {
 
 function Skills() {
   const skills = [
-    "Next.js",
-    "Node.js",
+    "Python",
+    "SQL",
+    "Machine Learning",
     "AWS",
     "GenAI",
     "LangChain",
     "RAG",
-    "TypeScript",
+    "Prompting",
     "Docker",
     "PostgreSQL",
-    "Redis",
-    "CI/CD (GitHub Actions)",
-    "Prisma",
+    "MSBI",
+    "CI/CD (GitHub Actions)"
   ];
   return (
     <section className="max-w-5xl mx-auto px-5 sm:px-8 md:px-10 lg:px-12 w-full mt-8 sm:mt-10">
@@ -555,9 +550,9 @@ function VenturesSection() {
       </h3>
       <p className="text-neutral-700 dark:text-neutral-400 mt-6 max-w-5xl mx-auto text-xl sm:text-2xl leading-relaxed">
          I've always loved the challenge of building and shipping fast, and for me, hackathons were the ultimate test.
-        Being in over 20 national competitions taught me what it truly takes to turn a big idea into a real, working
-        product over a single weekend. You learn to make smart calls on the fly and just focus on what's essential to
-        get it done. That's how I learned to deliver under pressure, which led to 8 placements as a winner or finalist.
+        With a strong foundation in analytics, machine learning, and problem-solving, I’m driven by curiosity and the 
+        excitement of turning ideas into impactful solutions. My journey so far has taught me to learn fast, adapt 
+        quickly, and keep pushing boundaries and I’m just getting started.
       </p>
     </section>
   );
