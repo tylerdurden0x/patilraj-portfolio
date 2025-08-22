@@ -251,15 +251,14 @@ function ExperienceItem({ e, isOpen, onToggle }) {
   return (
     <Card
       className={cx(
-        "cursor-pointer transition-colors p-3 sm:p-4",
+        "cursor-pointer transition-colors p-4",
         isOpen && "ring-black/20 dark:ring-white/20"
       )}
       onClick={onToggle}
       role="button"
       aria-expanded={isOpen}
     >
-      {/* Row */}
-      <div className="flex items-center gap-3 sm:gap-4 w-full overflow-hidden flex-wrap">
+      <div className="flex flex-col space-y-3">
         {/* Logo */}
         <div className="shrink-0 select-none" aria-hidden>
           {isImage ? (
@@ -273,27 +272,28 @@ function ExperienceItem({ e, isOpen, onToggle }) {
           )}
         </div>
 
-        {/* Company + Role */}
-        <div className="flex-1 min-w-0">
-          <div className="font-semibold text-neutral-900 dark:text-white break-words">
-            {e.company}
+        {/* Company / Role + Dates */}
+        <div className="flex items-start justify-between w-full">
+          <div className="flex flex-col">
+            <div className="font-semibold text-neutral-900 dark:text-white truncate">
+              {e.company}
+            </div>
+            <div className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
+              {e.role}
+            </div>
           </div>
-          <div className="text-sm text-neutral-500 dark:text-neutral-400 break-words">
-            {e.role}
-          </div>
-        </div>
 
-        {/* Dates + Chevron */}
-        <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 shrink-0">
-          <span className="whitespace-nowrap">
-            {e.start} - {e.end}
-          </span>
-          <ChevronDown
-            className={cx(
-              "w-4 h-4 transition-transform duration-500",
-              isOpen ? "rotate-180" : "rotate-0"
-            )}
-          />
+          <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+            <span>
+              {e.start} - {e.end}
+            </span>
+            <ChevronDown
+              className={cx(
+                "w-4 h-4 transition-transform duration-500",
+                isOpen ? "rotate-180" : "rotate-0"
+              )}
+            />
+          </div>
         </div>
       </div>
 
@@ -321,6 +321,8 @@ function ExperienceItem({ e, isOpen, onToggle }) {
     </Card>
   );
 }
+
+
 
 
 
