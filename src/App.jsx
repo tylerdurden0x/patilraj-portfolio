@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
+import { MessageCircle, X, Send } from "lucide-react";
 import {
   Github,
   Linkedin,
@@ -664,6 +665,10 @@ function ClosingSection() {
 
 
 
+
+
+
+
 function HomeView() {
   return (
     <div className="space-y-6 sm:space-y-8">
@@ -994,6 +999,8 @@ function Dock({ view, dark, setDark }) {
   );
 
 }
+
+
 
 
 /* --------------------------------- App ---------------------------------- */
