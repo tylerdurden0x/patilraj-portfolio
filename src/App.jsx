@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
+import ChatWidget from "./ChatWidget";
 import { MessageCircle, X, Send } from "lucide-react";
 import {
   Github,
@@ -1073,6 +1074,9 @@ export default function App() {
       <footer className="text-center py-6 text-base sm:text-lg font-bold text-neutral-900 dark:text-white">
       
       </footer>
+
+      {/* add chat widget */}
+      <ChatWidget />
 
     </div>
   );
