@@ -50,7 +50,7 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="fixed z-50 bottom-4 right-4 sm:bottom-6 sm:right-6">
+    <div className="fixed z-50 right-4 sm:right-6 bottom-20 md:bottom-6">
       <AnimatePresence initial={false}>
         {!open && (
           <motion.button
