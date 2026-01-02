@@ -148,7 +148,7 @@ const PROJECTS = [
     source: "https://github.com/you/safire"
   },
   {
-    title: "E-commerce Store",
+    title: "E-commerce Store Site",
     timeline: "March 2025 – April 2025",
     description:
       "Full-stack store with payments & order tracking.",
