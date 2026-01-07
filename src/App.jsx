@@ -117,7 +117,7 @@ const BLOG_POSTS = [
 
 const PROJECTS = [
   {
-    title: "Supereddit - AI Reddit Automation Platform",
+    title: "Supereddit - AI Reddit Automation Platform Site",
     timeline: "June 2025 – July 2025",
     description:
       "Built a multi-tenant SaaS for Reddit automation with an AI content engine, smart scheduling, and real-time keyword tracking. Powered by a producer–consumer backend and a Next.js dashboard.",
