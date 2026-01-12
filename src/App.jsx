@@ -151,7 +151,7 @@ const PROJECTS = [
     title: "E-commerce Store Site",
     timeline: "March 2025 – April 2025",
     description:
-      "Full-stack store with payments & order tracking.",
+      "Full-stack store with payments & issue tracking.",
     video: "https://player.vimeo.com/video/246115326", // <-- replace
     tech: ["Next.js", "RAG", "Redis", "Docker", "Node.js", "MongoDB", "Puppeteer", "Prisma"],
     website: "https://example.com",
