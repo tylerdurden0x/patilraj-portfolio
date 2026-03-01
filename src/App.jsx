@@ -604,7 +604,7 @@ function ContactSection() {
         <span>
           Want to chat? Feel free to{" "}
           <a
-            href="https://www.linkedin.com/in/thisisrajpatil"
+            href="https://www.linkedin.com/in/mrrajpatil/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
