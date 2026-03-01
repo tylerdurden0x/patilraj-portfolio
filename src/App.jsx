@@ -889,7 +889,7 @@ function Dock({ view, dark, setDark }) {
 
   const socials = [
     { label: "GitHub", Icon: Github, href: "https://github.com/tylerdurden0x" },
-    { label: "LinkedIn", Icon: Linkedin, href: "https://www.linkedin.com/in/thisisrajpatil" },
+    { label: "LinkedIn", Icon: Linkedin, href: "https://www.linkedin.com/in/mrrajpatil/" },
     { label: "X", Icon: IconX, href: "https://x.com/praajhere" },
   ];
 
