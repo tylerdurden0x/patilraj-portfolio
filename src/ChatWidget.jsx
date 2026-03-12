@@ -21,7 +21,7 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://portfolio-backend-for-chat-widget.onrender.com", {
+      const res = await fetch("https://portfolio-backend-for-chat-widget.onrender.com/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
