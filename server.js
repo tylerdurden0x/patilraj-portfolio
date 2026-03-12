@@ -22,7 +22,10 @@ let db;
 
 async function connectDB() {
   try {
-    const client = new MongoClient(MONGO_URI);
+    const client = new MongoClient(MONGO_URI, {
+  tls: true,
+  serverSelectionTimeoutMS: 3000,
+});
     await client.connect();
     db = client.db("portfolio");
     console.log("✅ MongoDB connected");
