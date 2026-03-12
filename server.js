@@ -2,6 +2,7 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
+import { MongoClient } from "mongodb";
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,6 +15,22 @@ app.use((req, res, next) => {
   if (req.method === "OPTIONS") return res.sendStatus(200);
   next();
 });
+
+// MongoDB setup
+const MONGO_URI = process.env.MONGO_URI;
+let db;
+
+async function connectDB() {
+  try {
+    const client = new MongoClient(MONGO_URI);
+    await client.connect();
+    db = client.db("portfolio");
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+  }
+}
+connectDB();
 
 const SYSTEM_PROMPT = `You are Raj's personal AI assistant on his portfolio website. Your name is "Raj Assistant".
 Your ONLY goal is to make recruiters and hiring managers excited about Raj and want to contact him.
@@ -240,6 +257,16 @@ app.post("/api/gemini", async (req, res) => {
 
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "I couldn't generate a response. Please try again.";
+
+    // Save to MongoDB (non-blocking — won't crash if DB is down)
+    if (db) {
+      db.collection("chats").insertOne({
+        timestamp: new Date(),
+        userMessage: message,
+        botReply: text,
+        history: conversationHistory,
+      }).catch((err) => console.error("MongoDB save error:", err));
+    }
 
     res.status(200).json({ text });
   } catch (err) {
