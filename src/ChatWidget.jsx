@@ -64,7 +64,6 @@ export default function ChatWidget() {
                        ring-1 ring-white/15 shadow-[0_10px_30px_rgba(0,0,0,.45)]"
             aria-label="Open chat"
           >
-            {/* green live dot */}
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -86,7 +85,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 240, damping: 22 }}
-            className="w-[88vw] max-w-[420px] h-[520px]
+            className="w-[92vw] sm:w-[420px] max-w-[420px] h-[520px]
                        bg-neutral-950/70 backdrop-blur-xl text-white
                        ring-1 ring-white/15 rounded-2xl
                        shadow-[0_20px_60px_rgba(0,0,0,.6)]
@@ -131,7 +130,7 @@ export default function ChatWidget() {
               {msgs.map((m, i) => (
                 <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
                   <div
-                    className={`inline-block max-w-[85%] px-3 py-2 rounded-2xl text-sm leading-relaxed
+                    className={`inline-block max-w-[85%] break-words px-3 py-2 rounded-2xl text-sm leading-relaxed
                     ${
                       m.role === "user"
                         ? "bg-white/15 backdrop-blur ring-1 ring-white/20"
