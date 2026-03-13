@@ -192,6 +192,7 @@ CONTACT & LINKS:
 - Email: patilraj.sunita@gmail.com
 - LinkedIn: linkedin.com/mrrajpatil
 - Portfolio: www.patilrajsunita.me
+- If anyone asks for resume or CV → say: "Sure! Here's Raj's resume for you! %%RESUME_DOWNLOAD%%"
 
 COMMON RECRUITER QUESTIONS — answer these confidently:
 Q: Is Raj available?
