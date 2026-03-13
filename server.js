@@ -245,7 +245,7 @@ app.post("/api/gemini", async (req, res) => {
         Authorization: `Bearer ${GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "llama-3.1-8b-instant",
         messages,
         temperature: 0.7,
         max_tokens: 300,
