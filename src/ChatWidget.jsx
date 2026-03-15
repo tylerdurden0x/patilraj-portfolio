@@ -6,27 +6,27 @@ const RESUME_URL = "https://raw.githubusercontent.com/tylerdurden0x/patilraj-por
 const RESUME_TRIGGER = "%%RESUME_DOWNLOAD%%";
 
 export default function ChatWidget() {
-const [open, setOpen] = useState(false);
-const [msgs, setMsgs] = useState([]);
-const [input, setInput] = useState("");
-const [loading, setLoading] = useState(false);
-const [keyboardHeight, setKeyboardHeight] = useState(0);
-const scRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [msgs, setMsgs] = useState([]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [bottomOffset, setBottomOffset] = useState(0);
+  const scRef = useRef(null);
 
   useEffect(() => {
     scRef.current?.scrollTo(0, scRef.current.scrollHeight);
   }, [msgs, open]);
 
   useEffect(() => {
-  const handleResize = () => {
-    if (window.visualViewport) {
-      const kbHeight = window.innerHeight - window.visualViewport.height;
-      setKeyboardHeight(kbHeight > 100 ? kbHeight : 0);
-    }
-  };
-  window.visualViewport?.addEventListener("resize", handleResize);
-  return () => window.visualViewport?.removeEventListener("resize", handleResize);
-}, []);
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const kbHeight = window.innerHeight - window.visualViewport.height;
+        setBottomOffset(kbHeight > 100 ? kbHeight : 0);
+      }
+    };
+    window.visualViewport?.addEventListener("resize", handleResize);
+    return () => window.visualViewport?.removeEventListener("resize", handleResize);
+  }, []);
 
   async function ask() {
     if (!input.trim() || loading) return;
@@ -65,8 +65,9 @@ const scRef = useRef(null);
   }
 
   function renderMessage(m, i) {
-    const hasResume = m?.content?.includes(RESUME_TRIGGER) ?? false;
-    const cleanText = m?.content?.replace(RESUME_TRIGGER, "")?.trim() ?? "";
+    if (!m || !m.content) return null;
+    const hasResume = m.content.includes(RESUME_TRIGGER);
+    const cleanText = m.content.replace(RESUME_TRIGGER, "").trim();
 
     return (
       <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
@@ -95,13 +96,13 @@ const scRef = useRef(null);
     );
   }
 
+  const mobileBottom = bottomOffset > 0 ? `${bottomOffset + 8}px` : "6rem";
+
   return (
     <div
-  className="fixed z-50 right-3 sm:right-6 sm:bottom-6"
-  style={{ bottom: keyboardHeight > 0 ? `${keyboardHeight + 8}px` : undefined }}
-  // add this class too:
-  // bottom-24 when keyboard closed, dynamic when open
->
+      className="fixed z-50 right-3 sm:right-6"
+      style={{ bottom: window.innerWidth < 640 ? mobileBottom : "1.5rem" }}
+    >
       <AnimatePresence initial={false}>
         {!open && (
           <motion.button
@@ -136,9 +137,9 @@ const scRef = useRef(null);
             transition={{ type: "spring", stiffness: 240, damping: 22 }}
             style={{
               width: "min(92vw, 420px)",
-              height: "min(75vh, 520px)",
+              height: bottomOffset > 0 ? `calc(100vh - ${bottomOffset + 16}px)` : "min(70vh, 520px)",
             }}
-            className="bg-neutral-950/70 backdrop-blur-xl text-white
+            className="bg-neutral-950/90 backdrop-blur-xl text-white
                        ring-1 ring-white/15 rounded-2xl
                        shadow-[0_20px_60px_rgba(0,0,0,.6)]
                        flex flex-col overflow-hidden"
