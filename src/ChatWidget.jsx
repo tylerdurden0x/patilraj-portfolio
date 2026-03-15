@@ -33,7 +33,8 @@ export default function ChatWidget() {
         }),
       });
       const data = await res.json();
-      setMsgs((m) => [...m, { role: "assistant", content: data.text }]);
+      const replyText = data?.text || "I am a bit busy right now — please try again in a moment! 😊";
+      setMsgs((m) => [...m, { role: "assistant", content: replyText }]);
     } catch {
       setMsgs((m) => [
         ...m,
@@ -52,8 +53,8 @@ export default function ChatWidget() {
   }
 
   function renderMessage(m, i) {
-    const hasResume = m.content.includes(RESUME_TRIGGER);
-    const cleanText = m.content.replace(RESUME_TRIGGER, "").trim();
+    const hasResume = m?.content?.includes(RESUME_TRIGGER) ?? false;
+    const cleanText = m?.content?.replace(RESUME_TRIGGER, "")?.trim() ?? "";
 
     return (
       <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
