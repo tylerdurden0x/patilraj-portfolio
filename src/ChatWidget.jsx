@@ -6,15 +6,27 @@ const RESUME_URL = "https://raw.githubusercontent.com/tylerdurden0x/patilraj-por
 const RESUME_TRIGGER = "%%RESUME_DOWNLOAD%%";
 
 export default function ChatWidget() {
-  const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const scRef = useRef(null);
+const [open, setOpen] = useState(false);
+const [msgs, setMsgs] = useState([]);
+const [input, setInput] = useState("");
+const [loading, setLoading] = useState(false);
+const [keyboardHeight, setKeyboardHeight] = useState(0);
+const scRef = useRef(null);
 
   useEffect(() => {
     scRef.current?.scrollTo(0, scRef.current.scrollHeight);
   }, [msgs, open]);
+
+  useEffect(() => {
+  const handleResize = () => {
+    if (window.visualViewport) {
+      const kbHeight = window.innerHeight - window.visualViewport.height;
+      setKeyboardHeight(kbHeight > 100 ? kbHeight : 0);
+    }
+  };
+  window.visualViewport?.addEventListener("resize", handleResize);
+  return () => window.visualViewport?.removeEventListener("resize", handleResize);
+}, []);
 
   async function ask() {
     if (!input.trim() || loading) return;
@@ -84,7 +96,12 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="fixed z-50 right-3 bottom-24 sm:right-6 sm:bottom-6">
+    <div
+  className="fixed z-50 right-3 sm:right-6 sm:bottom-6"
+  style={{ bottom: keyboardHeight > 0 ? `${keyboardHeight + 8}px` : undefined }}
+  // add this class too:
+  // bottom-24 when keyboard closed, dynamic when open
+>
       <AnimatePresence initial={false}>
         {!open && (
           <motion.button
