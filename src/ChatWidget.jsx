@@ -107,10 +107,11 @@ function ThinkingIndicator({ loading }) {
   return (
     <div className="text-left">
       <div
-        className="inline-flex items-center gap-3 px-3 py-2.5 rounded-2xl ring-1"
+        className="inline-flex items-center gap-3 rounded-2xl"
         style={{
-          background: loading ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.15)",
-          borderColor: loading ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.04)",
+          padding: loading ? "10px 12px" : "0 4px",
+          background: loading ? "rgba(0,0,0,0.4)" : "transparent",
+          border: loading ? "1px solid rgba(255,255,255,0.1)" : "1px solid transparent",
           transition: "all 0.5s ease",
         }}
       >
@@ -119,10 +120,10 @@ function ThinkingIndicator({ loading }) {
           height={32}
           rx={18}
           ry={11}
-          lineW={loading ? 3 : 1.5}
-          tailLen={loading ? 70 : 25}
-          speed={loading ? 1.2 : 0.3}
-          dimOpacity={loading ? 1 : 0.35}
+          lineW={loading ? 3 : 2}
+          tailLen={loading ? 70 : 40}
+          speed={loading ? 2.8 : 2.2}
+          dimOpacity={loading ? 1 : 0.65}
         />
         <AnimatePresence mode="wait">
           {loading && (
