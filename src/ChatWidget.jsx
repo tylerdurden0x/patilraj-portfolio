@@ -16,43 +16,128 @@ const THINKING_PHRASES = [
   "one sec, worth the wait…",
 ];
 
-function ThinkingIndicator() {
+function InfinityCanvas({ width, height, rx, ry, lineW, tailLen, speed, dimOpacity = 1 }) {
+  const canvasRef = useRef(null);
+  // Use refs so animation loop always sees latest values without restart
+  const propsRef = useRef({ lineW, tailLen, speed, dimOpacity });
+  useEffect(() => { propsRef.current = { lineW, tailLen, speed, dimOpacity }; }, [lineW, tailLen, speed, dimOpacity]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const cx = width / 2;
+    const cy = height / 2;
+    const N = 400;
+
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const t = (i / N) * Math.PI * 2;
+      const denom = 1 + Math.sin(t) * Math.sin(t);
+      pts.push([
+        cx + rx * Math.cos(t) / denom,
+        cy + ry * Math.sin(t) * Math.cos(t) / denom,
+      ]);
+    }
+
+    let offset = 0;
+    let raf;
+
+    function frame() {
+      const { lineW, tailLen, speed, dimOpacity } = propsRef.current;
+      ctx.clearRect(0, 0, width, height);
+
+      // Dim base
+      ctx.beginPath();
+      ctx.moveTo(pts[0][0], pts[0][1]);
+      for (let i = 1; i < N; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+      ctx.closePath();
+      ctx.strokeStyle = `rgba(255,255,255,${0.1 * dimOpacity})`;
+      ctx.lineWidth = lineW;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.shadowBlur = 0;
+      ctx.stroke();
+
+      // Travelling glow
+      for (let j = 0; j < tailLen; j++) {
+        const idx  = (Math.floor(offset) - j + N) % N;
+        const nidx = (idx + 1) % N;
+        const alpha = Math.pow(1 - j / tailLen, 2) * dimOpacity;
+
+        ctx.beginPath();
+        ctx.moveTo(pts[idx][0], pts[idx][1]);
+        ctx.lineTo(pts[nidx][0], pts[nidx][1]);
+        ctx.lineCap = "round";
+        ctx.shadowColor = "white";
+        ctx.shadowBlur = j < 4 ? 3 : 0;
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.lineWidth = lineW;
+        ctx.stroke();
+      }
+
+      ctx.shadowBlur = 0;
+      offset = (offset + speed) % N;
+      raf = requestAnimationFrame(frame);
+    }
+
+    frame();
+    return () => cancelAnimationFrame(raf);
+  }, [width, height, rx, ry]); // only restart if size changes
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      style={{ display: "block", flexShrink: 0 }}
+    />
+  );
+}
+
+function ThinkingIndicator({ loading }) {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
+    if (!loading) return;
     const id = setInterval(() => setIdx((i) => (i + 1) % THINKING_PHRASES.length), 2200);
     return () => clearInterval(id);
-  }, []);
+  }, [loading]);
 
   return (
     <div className="text-left">
-      <div className="inline-flex items-center gap-2.5 px-3 py-2.5 rounded-2xl bg-black/40 ring-1 ring-white/10">
-        {/* Grok-style orb */}
-        <div style={{ position: "relative", width: 20, height: 20, flexShrink: 0 }}>
-          <svg width="20" height="20" viewBox="0 0 20 20" style={{ position: "absolute", inset: 0 }}>
-            <circle cx="10" cy="10" r="8.5" stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" />
-            <circle
-              cx="10" cy="10" r="8.5"
-              stroke="rgba(255,255,255,0.9)"
-              strokeWidth="2"
-              strokeDasharray="14 40"
-              strokeLinecap="round"
-              fill="none"
-              style={{
-                transformOrigin: "center",
-                animation: "raj-spin 1s linear infinite",
-              }}
-            />
-          </svg>
-        </div>
-        {/* Fading text */}
-        <span
-          key={idx}
-          className="text-sm text-white/60"
-          style={{ animation: "raj-fade 2.2s ease forwards" }}
-        >
-          {THINKING_PHRASES[idx]}
-        </span>
+      <div
+        className="inline-flex items-center gap-3 px-3 py-2.5 rounded-2xl ring-1"
+        style={{
+          background: loading ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.15)",
+          borderColor: loading ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.04)",
+          transition: "all 0.5s ease",
+        }}
+      >
+        <InfinityCanvas
+          width={50}
+          height={32}
+          rx={18}
+          ry={11}
+          lineW={loading ? 3 : 1.5}
+          tailLen={loading ? 70 : 25}
+          speed={loading ? 1.2 : 0.3}
+          dimOpacity={loading ? 1 : 0.35}
+        />
+        <AnimatePresence mode="wait">
+          {loading && (
+            <motion.span
+              key={idx}
+              initial={{ opacity: 0, x: -4 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 4 }}
+              transition={{ duration: 0.25 }}
+              className="text-sm text-white/60 whitespace-nowrap"
+            >
+              {THINKING_PHRASES[idx]}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -68,7 +153,7 @@ export default function ChatWidget() {
 
   useEffect(() => {
     scRef.current?.scrollTo(0, scRef.current.scrollHeight);
-  }, [msgs, open]);
+  }, [msgs, open, loading]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -104,7 +189,6 @@ export default function ChatWidget() {
       });
       const data = await res.json();
       const replyText = data?.text || "I am a bit busy right now — please try again in a moment! 😊";
-      // Attach resume trigger if user asked for resume and backend didn't include it
       const shouldShowResume = isResumeRequest(userText) || replyText.includes(RESUME_TRIGGER);
       const finalText = replyText.includes(RESUME_TRIGGER)
         ? replyText
@@ -165,19 +249,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Keyframes injected once */}
-      <style>{`
-        @keyframes raj-spin {
-          to { transform: rotate(360deg); }
-        }
-        @keyframes raj-fade {
-          0%   { opacity: 0; transform: translateY(3px); }
-          15%  { opacity: 1; transform: translateY(0);   }
-          80%  { opacity: 1; transform: translateY(0);   }
-          100% { opacity: 0; transform: translateY(-3px);}
-        }
-      `}</style>
-
       <div
         className="fixed z-50 right-3 sm:right-6"
         style={{ bottom: window.innerWidth < 640 ? mobileBottom : "1.5rem" }}
@@ -256,8 +327,8 @@ export default function ChatWidget() {
                 )}
                 {msgs.map((m, i) => renderMessage(m, i))}
 
-                {/* ✨ Replaced boring "typing…" with orb indicator */}
-                {loading && <ThinkingIndicator />}
+                {/* Always visible — dim idle, bright + text when loading */}
+                <ThinkingIndicator loading={loading} />
               </div>
 
               {/* Composer */}
