@@ -27,22 +27,24 @@ function ThinkingIndicator() {
   return (
     <div className="text-left">
       <div className="inline-flex items-center gap-2.5 px-3 py-2.5 rounded-2xl bg-black/40 ring-1 ring-white/10">
-        {/* Spinning orb */}
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
-          <circle cx="9" cy="9" r="8" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-          <circle
-            cx="9" cy="9" r="8"
-            stroke="rgba(255,255,255,0.6)"
-            strokeWidth="1.5"
-            strokeDasharray="13 38"
-            strokeLinecap="round"
-            style={{
-              transformOrigin: "center",
-              animation: "raj-spin 1.1s linear infinite",
-            }}
-          />
-          <circle cx="9" cy="9" r="3" fill="rgba(255,255,255,0.25)" />
-        </svg>
+        {/* Grok-style orb */}
+        <div style={{ position: "relative", width: 20, height: 20, flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" style={{ position: "absolute", inset: 0 }}>
+            <circle cx="10" cy="10" r="8.5" stroke="rgba(255,255,255,0.1)" strokeWidth="2" fill="none" />
+            <circle
+              cx="10" cy="10" r="8.5"
+              stroke="rgba(255,255,255,0.9)"
+              strokeWidth="2"
+              strokeDasharray="14 40"
+              strokeLinecap="round"
+              fill="none"
+              style={{
+                transformOrigin: "center",
+                animation: "raj-spin 1s linear infinite",
+              }}
+            />
+          </svg>
+        </div>
         {/* Fading text */}
         <span
           key={idx}
