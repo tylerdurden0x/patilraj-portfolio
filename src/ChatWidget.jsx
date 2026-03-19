@@ -5,6 +5,57 @@ import { MessageCircle, Send, Trash2, ChevronDown, Bot, Download } from "lucide-
 const RESUME_URL = "https://raw.githubusercontent.com/tylerdurden0x/patilraj-portfolio/main/public/patilrajresume.pdf";
 const RESUME_TRIGGER = "%%RESUME_DOWNLOAD%%";
 
+const THINKING_PHRASES = [
+  "sifting through Raj's brain…",
+  "checking the projects vault…",
+  "pulling up the good stuff…",
+  "reading between the lines…",
+  "connecting the dots…",
+  "almost there…",
+  "making sure this sounds right…",
+  "one sec, worth the wait…",
+];
+
+function ThinkingIndicator() {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % THINKING_PHRASES.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="text-left">
+      <div className="inline-flex items-center gap-2.5 px-3 py-2.5 rounded-2xl bg-black/40 ring-1 ring-white/10">
+        {/* Spinning orb */}
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
+          <circle cx="9" cy="9" r="8" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
+          <circle
+            cx="9" cy="9" r="8"
+            stroke="rgba(255,255,255,0.6)"
+            strokeWidth="1.5"
+            strokeDasharray="13 38"
+            strokeLinecap="round"
+            style={{
+              transformOrigin: "center",
+              animation: "raj-spin 1.1s linear infinite",
+            }}
+          />
+          <circle cx="9" cy="9" r="3" fill="rgba(255,255,255,0.25)" />
+        </svg>
+        {/* Fading text */}
+        <span
+          key={idx}
+          className="text-sm text-white/60"
+          style={{ animation: "raj-fade 2.2s ease forwards" }}
+        >
+          {THINKING_PHRASES[idx]}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState([]);
@@ -28,9 +79,14 @@ export default function ChatWidget() {
     return () => window.visualViewport?.removeEventListener("resize", handleResize);
   }, []);
 
+  function isResumeRequest(text) {
+    return /resume|cv|curriculum vitae|download/i.test(text);
+  }
+
   async function ask() {
     if (!input.trim() || loading) return;
-    const nextMsgs = [...msgs, { role: "user", content: input.trim() }];
+    const userText = input.trim();
+    const nextMsgs = [...msgs, { role: "user", content: userText }];
     setMsgs(nextMsgs);
     setInput("");
     setLoading(true);
@@ -40,13 +96,20 @@ export default function ChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: nextMsgs[nextMsgs.length - 1].content,
+          message: userText,
           history: nextMsgs,
         }),
       });
       const data = await res.json();
       const replyText = data?.text || "I am a bit busy right now — please try again in a moment! 😊";
-      setMsgs((m) => [...m, { role: "assistant", content: replyText }]);
+      // Attach resume trigger if user asked for resume and backend didn't include it
+      const shouldShowResume = isResumeRequest(userText) || replyText.includes(RESUME_TRIGGER);
+      const finalText = replyText.includes(RESUME_TRIGGER)
+        ? replyText
+        : shouldShowResume
+        ? replyText + " " + RESUME_TRIGGER
+        : replyText;
+      setMsgs((m) => [...m, { role: "assistant", content: finalText }]);
     } catch {
       setMsgs((m) => [
         ...m,
@@ -99,124 +162,135 @@ export default function ChatWidget() {
   const mobileBottom = bottomOffset > 0 ? `${bottomOffset + 8}px` : "6rem";
 
   return (
-    <div
-      className="fixed z-50 right-3 sm:right-6"
-      style={{ bottom: window.innerWidth < 640 ? mobileBottom : "1.5rem" }}
-    >
-      <AnimatePresence initial={false}>
-        {!open && (
-          <motion.button
-            key="bubble"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 16 }}
-            onClick={() => setOpen(true)}
-            className="group flex items-center gap-3 px-4 py-3 rounded-2xl
-                       bg-neutral-900/70 backdrop-blur-xl text-white
-                       ring-1 ring-white/15 shadow-[0_10px_30px_rgba(0,0,0,.45)]"
-            aria-label="Open chat"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            <div className="text-left leading-tight">
-              <div className="text-[11px] uppercase tracking-wide opacity-70">Chat with</div>
-              <div className="text-sm font-semibold">Raj Support</div>
-            </div>
-            <MessageCircle className="ml-1 h-5 w-5 opacity-80 group-hover:opacity-100" />
-          </motion.button>
-        )}
+    <>
+      {/* Keyframes injected once */}
+      <style>{`
+        @keyframes raj-spin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes raj-fade {
+          0%   { opacity: 0; transform: translateY(3px); }
+          15%  { opacity: 1; transform: translateY(0);   }
+          80%  { opacity: 1; transform: translateY(0);   }
+          100% { opacity: 0; transform: translateY(-3px);}
+        }
+      `}</style>
 
-        {open && (
-          <motion.div
-            key="panel"
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 240, damping: 22 }}
-            style={{
-              width: "min(92vw, 420px)",
-              height: bottomOffset > 0 ? `calc(100vh - ${bottomOffset + 16}px)` : "min(70vh, 520px)",
-            }}
-            className="bg-neutral-950/90 backdrop-blur-xl text-white
-                       ring-1 ring-white/15 rounded-2xl
-                       shadow-[0_20px_60px_rgba(0,0,0,.6)]
-                       flex flex-col overflow-hidden"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-white/5 shrink-0">
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                </span>
-                <div className="font-medium text-sm">
-                  Chat with <span className="font-semibold">Raj Support</span>
-                </div>
+      <div
+        className="fixed z-50 right-3 sm:right-6"
+        style={{ bottom: window.innerWidth < 640 ? mobileBottom : "1.5rem" }}
+      >
+        <AnimatePresence initial={false}>
+          {!open && (
+            <motion.button
+              key="bubble"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              onClick={() => setOpen(true)}
+              className="group flex items-center gap-3 px-4 py-3 rounded-2xl
+                         bg-neutral-900/70 backdrop-blur-xl text-white
+                         ring-1 ring-white/15 shadow-[0_10px_30px_rgba(0,0,0,.45)]"
+              aria-label="Open chat"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              <div className="text-left leading-tight">
+                <div className="text-[11px] uppercase tracking-wide opacity-70">Chat with</div>
+                <div className="text-sm font-semibold">Raj Support</div>
               </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="p-2 rounded-lg hover:bg-white/10"
-                aria-label="Minimize"
-              >
-                <ChevronDown className="h-5 w-5" />
-              </button>
-            </div>
+              <MessageCircle className="ml-1 h-5 w-5 opacity-80 group-hover:opacity-100" />
+            </motion.button>
+          )}
 
-            {/* Messages */}
-            <div ref={scRef} className="flex-1 overflow-y-auto p-3 space-y-3 min-h-0">
-              {msgs.length === 0 && (
-                <div className="h-full grid place-items-center text-center text-sm opacity-70 px-4">
-                  <div>
-                    <Bot className="mx-auto mb-3 h-8 w-8 opacity-80" />
-                    <div className="font-medium mb-1">Send a message to start the chat!</div>
-                    <div className="text-xs">Ask about Raj's skills, experience, projects, or links.</div>
+          {open && (
+            <motion.div
+              key="panel"
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 240, damping: 22 }}
+              style={{
+                width: "min(92vw, 420px)",
+                height: bottomOffset > 0 ? `calc(100vh - ${bottomOffset + 16}px)` : "min(70vh, 520px)",
+              }}
+              className="bg-neutral-950/90 backdrop-blur-xl text-white
+                         ring-1 ring-white/15 rounded-2xl
+                         shadow-[0_20px_60px_rgba(0,0,0,.6)]
+                         flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-white/5 shrink-0">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                  </span>
+                  <div className="font-medium text-sm">
+                    Chat with <span className="font-semibold">Raj Support</span>
                   </div>
                 </div>
-              )}
-              {msgs.map((m, i) => renderMessage(m, i))}
-              {loading && (
-                <div className="text-left">
-                  <div className="inline-block px-3 py-2 rounded-2xl text-sm bg-black/40 ring-1 ring-white/10 animate-pulse">
-                    typing…
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Composer */}
-            <div className="px-3 py-3 bg-white/5 border-t border-white/10 shrink-0">
-              <div className="flex items-center gap-2">
                 <button
-                  onClick={clearChat}
-                  className="p-2 rounded-xl hover:bg-white/10 shrink-0"
-                  title="Clear chat"
-                  aria-label="Clear chat"
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded-lg hover:bg-white/10"
+                  aria-label="Minimize"
                 >
-                  <Trash2 className="h-4 w-4" />
-                </button>
-                <input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && ask()}
-                  placeholder="Ask something…"
-                  className="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-white/10 ring-1 ring-white/15 placeholder-white/50 text-sm
-                             focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-                <button
-                  onClick={ask}
-                  disabled={loading}
-                  className="p-2.5 rounded-xl bg-white/20 hover:bg-white/25 active:scale-95 disabled:opacity-50 shrink-0"
-                  aria-label="Send"
-                >
-                  <Send className="h-4 w-4" />
+                  <ChevronDown className="h-5 w-5" />
                 </button>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+
+              {/* Messages */}
+              <div ref={scRef} className="flex-1 overflow-y-auto p-3 space-y-3 min-h-0">
+                {msgs.length === 0 && (
+                  <div className="h-full grid place-items-center text-center text-sm opacity-70 px-4">
+                    <div>
+                      <Bot className="mx-auto mb-3 h-8 w-8 opacity-80" />
+                      <div className="font-medium mb-1">Send a message to start the chat!</div>
+                      <div className="text-xs">Ask about Raj's skills, experience, projects, or links.</div>
+                    </div>
+                  </div>
+                )}
+                {msgs.map((m, i) => renderMessage(m, i))}
+
+                {/* ✨ Replaced boring "typing…" with orb indicator */}
+                {loading && <ThinkingIndicator />}
+              </div>
+
+              {/* Composer */}
+              <div className="px-3 py-3 bg-white/5 border-t border-white/10 shrink-0">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={clearChat}
+                    className="p-2 rounded-xl hover:bg-white/10 shrink-0"
+                    title="Clear chat"
+                    aria-label="Clear chat"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                  <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && ask()}
+                    placeholder="Ask something…"
+                    className="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-white/10 ring-1 ring-white/15 placeholder-white/50 text-sm
+                               focus:outline-none focus:ring-2 focus:ring-white/30"
+                  />
+                  <button
+                    onClick={ask}
+                    disabled={loading}
+                    className="p-2.5 rounded-xl bg-white/20 hover:bg-white/25 active:scale-95 disabled:opacity-50 shrink-0"
+                    aria-label="Send"
+                  >
+                    <Send className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }
