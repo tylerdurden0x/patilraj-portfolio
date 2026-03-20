@@ -23,9 +23,9 @@ let db;
 async function connectDB() {
   try {
     const client = new MongoClient(MONGO_URI, {
-  tls: true,
-  serverSelectionTimeoutMS: 3000,
-});
+      tls: true,
+      serverSelectionTimeoutMS: 3000,
+    });
     await client.connect();
     db = client.db("portfolio");
     console.log("✅ MongoDB connected");
@@ -224,10 +224,14 @@ app.post("/api/gemini", async (req, res) => {
       return res.status(500).json({ error: "GROQ_API_KEY not set in environment" });
     }
 
-    // Build conversation history
+    // FIX: Keep only last 4 messages (2 exchanges)
+    // System prompt ~2000 tokens + reply 300 = ~2300 base
+    // Groq free tier llama-3.1-8b-instant = 6000 TPM
+    // 4 history msgs (~400 tokens) keeps us safely under limit
     const conversationHistory = history
       .slice(0, -1)
       .filter((m) => m.content && m.content.trim() !== "")
+      .slice(-4)
       .map((m) => ({
         role: m.role === "assistant" ? "assistant" : "user",
         content: m.content,
@@ -256,6 +260,14 @@ app.post("/api/gemini", async (req, res) => {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Groq API error:", errorData);
+
+      // FIX: handle 429 rate limit with a friendly message instead of crashing
+      if (response.status === 429) {
+        return res.status(200).json({
+          text: "I'm getting a lot of questions right now — give me just a moment and try again! 😊",
+        });
+      }
+
       return res.status(response.status).json({ error: "Groq API error", details: errorData });
     }
 
