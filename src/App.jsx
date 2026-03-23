@@ -75,7 +75,7 @@ const EXPERIENCES = [
       "Leveraged advanced technologies including RDBMS, SQL, DBT, Python, ETL processes, and Microsoft BI tools to deliver comprehensive data solutions",
       "Built interactive dashboards and reports using Power BI, transforming raw data into actionable insights for stakeholders across retail operations"
     ] },
-  { company: "Cognizant Inc.", role: "Microsoft BI Intern", start: "Jan 2022", end: "July 2022", logo: "/ctslogo.png", details: [
+  { company: "Cognizant Inc. USA", role: "Microsoft BI Intern", start: "Jan 2022", end: "July 2022", logo: "/ctslogo.png", details: [
     "Completed paid internship during final semester, receiving comprehensive training in Microsoft BI technologies including MySQL, SSMS, SSIS, SSAS, and SSRS.",
     "Developed data visualization dashboards using Power BI and implemented data ingestion pipelines with Azure Data Factory during internship.",
     "Gained practical experience with ETL processes, database management, and business intelligence reporting solutions."
